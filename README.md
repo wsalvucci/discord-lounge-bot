@@ -5,16 +5,15 @@ This is a bot for The Lounge discord server. Currently in development with sever
 
 Command Usage
 ------------
-Commands begin with !!
+Commands begin with `!!`
 
 
 Command List
 ------------
-duel @user
-- duels the indicated user
-slap @user
-- slaps the indicated user
-fliptable
-- flips a table
-echo "message"
-- repeats the given message
+`duel @user` duels the mentioned user
+
+`slap @user` slaps the mentioned user
+
+`fliptable` flips a table
+
+`echo "message"` repeats the given message
