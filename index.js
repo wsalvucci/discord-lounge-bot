@@ -132,8 +132,8 @@ function drawCard(msg, numTimes) {
 	if (numTimes <= 5) {
 		var cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"];
 		var suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
-		var num = Math.ceil(Math.random() * 13);
-		var suitNum = Math.ceil(Math.random() * 4)
+		var num = Math.floor(Math.random() * 13);
+		var suitNum = Math.floor(Math.random() * 4)
 		msg.channel.send(cards[num] + " of " + suits[suitNum]);
 	} else {
 		msg.channel.send("Limit of 5 draws per command");
@@ -152,6 +152,8 @@ client.on('message', msg => {
           msg.reply('pong');
       } else if (msg.content === 'What is your purpose?') {
           msg.channel.send("To smoke hookers and bang weed. Gonna tear this town up.");
+      } else if (msg.content === 'ding') {
+          msg.reply('dong');
       }
     
     // COMMAND LIST
@@ -176,29 +178,20 @@ client.on('message', msg => {
               break;
 			case 'rolldice':
 				if(textResult.length > 1) {
-					if (typeof textResult[1] == 'number')
-						rollDice(msg, textResult[1]);
-					else
-						rollDice(msg, 1);
+					rollDice(msg, textResult[1]);
 				} else {
 					rollDice(msg, 1);
 				}
 				break;
 			case 'flipcoin':
 				if(textResult.length > 1) {
-					if (typeof textResult[1] == 'number')
-						flipCoin(msg, textResult[1]);
-					else
-						flipCoin(msg, 1);
+					flipCoin(msg, textResult[1]);
 				} else {
 					flipCoin(msg, 1);
 				}
 			case 'drawcard':
 				if(textResult.length > 1) {
-					if (typeof textResult[1] == 'number')
-						drawCard(msg, textResult[1]);
-					else
-						drawCard(msg, 1);
+					drawCard(msg, textResult[1]);
 				} else {
 					drawCard(msg, 1);
 				}
