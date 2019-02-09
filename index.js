@@ -105,6 +105,41 @@ function slap(msg, author, rare) {
   }
 }
 
+function rollDice(msg, numTimes) {
+	if (numTimes <= 5) {
+		for (var i=0; i < numTimes; i++)
+			msg.channel.send("Roll: " + Math.ceil(Math.random() * 6));
+	} else {
+		msg.channel.send("Limit of 5 rolls per command");
+	}
+}
+
+function flipCoin(msg, numTimes) {
+	if (numTimes <= 5) {
+		for (var i=0; i < numTimes; i++) {
+			var side = Math.ceil(Math.random() * 2);
+			if (side == 1)
+				msg.channel.send("Heads");
+			else
+				msg.channel.send("Tails");
+		}
+	} else {
+		msg.channel.send("Limit of 5 flips per command");
+	}
+}
+
+function drawCard(msg, numTimes) {
+	if (numTimes <= 5) {
+		var cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"];
+		var suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
+		var num = Math.floor(Math.random() * 13);
+		var suitNum = Math.floor(Math.random() * 4)
+		msg.channel.send(cards[num] + " of " + suits[suitNum]);
+	} else {
+		msg.channel.send("Limit of 5 draws per command");
+	}
+}
+
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -117,6 +152,8 @@ client.on('message', msg => {
           msg.reply('pong');
       } else if (msg.content === 'What is your purpose?') {
           msg.channel.send("To smoke hookers and bang weed. Gonna tear this town up.");
+      } else if (msg.content === 'ding') {
+          msg.reply('dong');
       }
     
     // COMMAND LIST
@@ -139,6 +176,27 @@ client.on('message', msg => {
             case 'slap':
               slap(msg, author, rare);
               break;
+			case 'rolldice':
+				if(textResult.length > 1) {
+					rollDice(msg, textResult[1]);
+				} else {
+					rollDice(msg, 1);
+				}
+				break;
+			case 'flipcoin':
+				if(textResult.length > 1) {
+					flipCoin(msg, textResult[1]);
+				} else {
+					flipCoin(msg, 1);
+				}
+				break;
+			case 'drawcard':
+				if(textResult.length > 1) {
+					drawCard(msg, textResult[1]);
+				} else {
+					drawCard(msg, 1);
+				}
+				break;
         }
       }
   }
