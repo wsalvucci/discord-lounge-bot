@@ -105,7 +105,7 @@ function slap(msg, author, rare) {
   }
 }
 
-function rollDice(numTimes) {
+function rollDice(msg, numTimes) {
 	if (numTimes <= 5) {
 		for (var i=0; i < numTimes; i++)
 			msg.channel.send("Roll: " + Math.ceil(Math.random() * 6));
@@ -114,7 +114,7 @@ function rollDice(numTimes) {
 	}
 }
 
-function flipCoin(numTimes) {
+function flipCoin(msg, numTimes) {
 	if (numTimes <= 5) {
 		for (var i=0; i < numTimes; i++) {
 			var side = Math.ceil(Math.random() * 2);
@@ -128,7 +128,7 @@ function flipCoin(numTimes) {
 	}
 }
 
-function drawCard(numTimes) {
+function drawCard(msg, numTimes) {
 	if (numTimes <= 5) {
 		var cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"];
 		var suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
@@ -177,30 +177,30 @@ client.on('message', msg => {
 			case 'rolldice':
 				if(textResult.length > 1) {
 					if (typeof textResult[1] == 'number')
-						rollDice(textResult[1]);
+						rollDice(msg, textResult[1]);
 					else
-						rollDice(1);
+						rollDice(msg, 1);
 				} else {
-					rollDice(1);
+					rollDice(msg, 1);
 				}
 				break;
 			case 'flipcoin':
 				if(textResult.length > 1) {
 					if (typeof textResult[1] == 'number')
-						flipCoin(textResult[1]);
+						flipCoin(msg, textResult[1]);
 					else
-						flipCoin(1);
+						flipCoin(msg, 1);
 				} else {
-					flipCoin(1);
+					flipCoin(msg, 1);
 				}
 			case 'drawcard':
 				if(textResult.length > 1) {
 					if (typeof textResult[1] == 'number')
-						drawCard(textResult[1]);
+						drawCard(msg, textResult[1]);
 					else
-						drawCard(1);
+						drawCard(msg, 1);
 				} else {
-					drawCard(1);
+					drawCard(msg, 1);
 				}
         }
       }
