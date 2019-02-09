@@ -105,6 +105,41 @@ function slap(msg, author, rare) {
   }
 }
 
+function rollDice(int numTimes) {
+	if (numTimes <= 5) {
+		for (var i=0; i < numTimes; i++)
+			msg.channel.send("Roll: " + Math.ceil(Math.random() * 6));
+	} else {
+		msg.channel.send("Limit of 5 rolls per command");
+	}
+}
+
+function flipCoin(int numTimes) {
+	if (numTimes <= 5) {
+		for (var i=0; i < numTimes; i++) {
+			var side = Math.ceil(Math.random() * 2);
+			if (side == 1)
+				msg.channel.send("Heads");
+			else
+				msg.channel.send("Tails");
+		}
+	} else {
+		msg.channel.send("Limit of 5 flips per command");
+	}
+}
+
+function drawCard(int numTimes) {
+	if (numTimes <= 5) {
+		var cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"];
+		var suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
+		var num = Math.ceil(Math.random() * 13);
+		var suitNum = Math.ceil(Math.random() * 4)
+		msg.channel.send(cards[num] + " of " + suits[suitNum]);
+	} else {
+		msg.channel.send("Limit of 5 draws per command");
+	}
+}
+
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -139,6 +174,34 @@ client.on('message', msg => {
             case 'slap':
               slap(msg, author, rare);
               break;
+			case 'rolldice':
+				if(textResult.length > 1) {
+					if (typeof textResult[1] == 'number')
+						rollDice(textResult[1]);
+					else
+						rollDice(1);
+				} else {
+					rollDice(1);
+				}
+				break;
+			case 'flipcoin':
+				if(textResult.length > 1) {
+					if (typeof textResult[1] == 'number')
+						flipCoin(textResult[1]);
+					else
+						flipCoin(1);
+				} else {
+					flipCoin(1);
+				}
+			case 'drawcard':
+				if(textResult.length > 1) {
+					if (typeof textResult[1] == 'number')
+						drawCard(textResult[1]);
+					else
+						drawCard(1);
+				} else {
+					drawCard(1);
+				}
         }
       }
   }
