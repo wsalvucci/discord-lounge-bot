@@ -189,12 +189,14 @@ client.on('message', msg => {
 				} else {
 					flipCoin(msg, 1);
 				}
+				break;
 			case 'drawcard':
 				if(textResult.length > 1) {
 					drawCard(msg, textResult[1]);
 				} else {
 					drawCard(msg, 1);
 				}
+				break;
         }
       }
   }
