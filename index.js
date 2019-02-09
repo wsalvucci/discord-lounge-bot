@@ -13,6 +13,19 @@ setInterval(() => {
   http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
 }, 280000);
 
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+	host: process.env.DATABASE_HOST;
+	user: process.env.DATABASE_USER;
+	password: process.env.DATABASE_PASSWORD;
+});
+
+con.connect(function(err) {
+	if (err) throw err;
+	console.log("Connected!");
+});
+
 function duel(msg, author, rare, textResult) {
   var opp = msg.mentions.users.first().username;
   var roll = Math.round(Math.random() * 100);
@@ -130,11 +143,13 @@ function flipCoin(msg, numTimes) {
 
 function drawCard(msg, numTimes) {
 	if (numTimes <= 5) {
-		var cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"];
-		var suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
-		var num = Math.floor(Math.random() * 13);
-		var suitNum = Math.floor(Math.random() * 4)
-		msg.channel.send(cards[num] + " of " + suits[suitNum]);
+		for (var i=0; i < numTimes; i++) {
+			var cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"];
+			var suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
+			var num = Math.floor(Math.random() * 13);
+			var suitNum = Math.floor(Math.random() * 4)
+			msg.channel.send(cards[num] + " of " + suits[suitNum]);
+		}
 	} else {
 		msg.channel.send("Limit of 5 draws per command");
 	}
@@ -174,8 +189,8 @@ client.on('message', msg => {
               echoMsg(msg, rare);
               break;
             case 'slap':
-              slap(msg, author, rare);
-              break;
+			  slap(msg, author, rare);
+			  break;
 			case 'rolldice':
 				if(textResult.length > 1) {
 					rollDice(msg, textResult[1]);
