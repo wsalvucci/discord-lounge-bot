@@ -13,18 +13,20 @@ setInterval(() => {
   http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
 }, 280000);
 
+/*
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-	host: process.env.DATABASE_HOST;
-	user: process.env.DATABASE_USER;
-	password: process.env.DATABASE_PASSWORD;
+	host: process.env.DATABASE_HOST,
+	user: process.env.DATABASE_USER,
+	password: process.env.DATABASE_PASSWORD
 });
 
 con.connect(function(err) {
 	if (err) throw err;
 	console.log("Connected!");
 });
+*/
 
 function duel(msg, author, rare, textResult) {
   var opp = msg.mentions.users.first().username;
