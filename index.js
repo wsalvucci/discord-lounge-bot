@@ -105,7 +105,7 @@ function slap(msg, author, rare) {
   }
 }
 
-function rollDice(int numTimes) {
+function rollDice(numTimes) {
 	if (numTimes <= 5) {
 		for (var i=0; i < numTimes; i++)
 			msg.channel.send("Roll: " + Math.ceil(Math.random() * 6));
@@ -114,7 +114,7 @@ function rollDice(int numTimes) {
 	}
 }
 
-function flipCoin(int numTimes) {
+function flipCoin(numTimes) {
 	if (numTimes <= 5) {
 		for (var i=0; i < numTimes; i++) {
 			var side = Math.ceil(Math.random() * 2);
@@ -128,7 +128,7 @@ function flipCoin(int numTimes) {
 	}
 }
 
-function drawCard(int numTimes) {
+function drawCard(numTimes) {
 	if (numTimes <= 5) {
 		var cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"];
 		var suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
