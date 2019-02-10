@@ -160,6 +160,14 @@ function drawCard(msg, numTimes) {
 	}
 }
 
+function createAccount(user) {
+	var query = 'INSERT INTO user_accounts(discord_id, discord_name) VALUES(' + user.id + ', "' + user.username + '")';
+	con.query(sql, function (err, result) {
+		if (err) throw err;
+		console.log("User Recorded");
+	});
+}
+
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -220,6 +228,20 @@ client.on('message', msg => {
         }
       }
   }
+});
+
+client.on('message', msg => {
+	if (msg.content.substr(0, 2) == '!!') {
+		var textResult = msg.content.substr(2).split(" ");
+        switch (textResult[0].toLowerCase()) {
+			case 'createAccount':
+				createAccount(msg.author);
+				break;
+			default:
+				msg.reply('Command `' + msg.content + '` not found');
+				break;
+		}
+	}
 });
 
 client.login(process.env.CLIENT_LOGIN);
