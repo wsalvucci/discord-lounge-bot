@@ -13,7 +13,6 @@ setInterval(() => {
   http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
 }, 280000);
 
-/*
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
@@ -26,7 +25,6 @@ con.connect(function(err) {
 	if (err) throw err;
 	console.log("Connected!");
 });
-*/
 
 function duel(msg, author, rare, textResult) {
   var opp = msg.mentions.users.first().username;
