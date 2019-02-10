@@ -162,7 +162,7 @@ function drawCard(msg, numTimes) {
 
 function createAccount(msg, user) {
 	var user_id = user.id;
-	con.query('SELECT * FROM user_accounts WHERE discord_id=' + connection.escape(user_id) + '', function (err, result, fields) {
+	con.query('SELECT * FROM user_accounts WHERE discord_id=' + con.escape(user_id) + '', function (err, result, fields) {
 	//con.query('SELECT * FROM user_accounts WHERE discord_id=2147483647', function (err, result, fields) {
 	//con.query('SELECT * FROM user_accounts', function (err, result, fields) {
 		if (err) throw err;
