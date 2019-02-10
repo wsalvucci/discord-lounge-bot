@@ -161,7 +161,7 @@ function drawCard(msg, numTimes) {
 }
 
 function createAccount(user) {
-	var query = 'INSERT INTO user_accounts(discord_id, discord_name) VALUES(' + user.id + ', "' + user.username + '")';
+	var sql = 'INSERT INTO user_accounts(discord_id, discord_name) VALUES(' + user.id + ', "' + user.username + '")';
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log("User Recorded");
