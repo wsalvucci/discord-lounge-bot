@@ -164,6 +164,7 @@ function createAccount(msg, user) {
 	con.query('SELECT * FROM user_accounts WHERE discord_id=' + user.id + '', function (err, result, fields) {
 		if (err) throw err;
 		if (result.length == 0) {
+			msg.reply(result.length);
 			var sql = 'INSERT INTO user_accounts(discord_id, discord_name) VALUES(' + user.id + ', "' + user.username + '")';
 			con.query(sql, function (err, result) {
 				if (err) throw err;
