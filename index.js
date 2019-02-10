@@ -234,7 +234,7 @@ client.on('message', msg => {
 	if (msg.content.substr(0, 2) == '!!') {
 		var textResult = msg.content.substr(2).split(" ");
         switch (textResult[0].toLowerCase()) {
-			case 'createAccount':
+			case 'createaccount':
 				createAccount(msg.author);
 				break;
 			default:
