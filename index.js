@@ -18,12 +18,17 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
 	host: process.env.DATABASE_HOST,
 	user: process.env.DATABASE_USER,
-	password: process.env.DATABASE_PASSWORD
+	password: process.env.DATABASE_PASSWORD,
+	database: process.env.DATABASE_NAME
 });
 
 con.connect(function(err) {
 	if (err) throw err;
 	console.log("Connected!");
+	con.query('SELECT * FROM bot_information', function (err, result, fields) {
+		if (err) throw err;
+		console.log("Running on version: " + result[0].info_data);
+	});
 });
 
 function duel(msg, author, rare, textResult) {
