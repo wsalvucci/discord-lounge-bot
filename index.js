@@ -160,12 +160,22 @@ function drawCard(msg, numTimes) {
 	}
 }
 
-function createAccount(user) {
-	var sql = 'INSERT INTO user_accounts(discord_id, discord_name) VALUES(' + user.id + ', "' + user.username + '")';
-	con.query(sql, function (err, result) {
+function createAccount(msg, user) {
+	con.query('SELECT * FROM user_accounts WHERE discord_id=' + user.id + '', function (err, result, fields) {
 		if (err) throw err;
-		console.log("User Recorded");
+		if (result.length == 0) {
+			var sql = 'INSERT INTO user_accounts(discord_id, discord_name) VALUES(' + user.id + ', "' + user.username + '")';
+			con.query(sql, function (err, result) {
+				if (err) throw err;
+				msg.reply('Account created!');
+			});
+		} else {
+			msg.reply('You already have an account!');
+		}
 	});
+	
+	
+	
 }
 
 client.on('ready', () => {
@@ -235,7 +245,7 @@ client.on('message', msg => {
 		var textResult = msg.content.substr(2).split(" ");
         switch (textResult[0].toLowerCase()) {
 			case 'createaccount':
-				createAccount(msg.author);
+				createAccount(msg, msg.author);
 				break;
 			default:
 				msg.reply('Command `' + msg.content + '` not found');
