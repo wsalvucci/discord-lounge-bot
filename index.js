@@ -160,14 +160,14 @@ function drawCard(msg, numTimes) {
 	}
 }
 
-function createAccount(msg, user) {
-	con.query('SELECT * FROM user_accounts WHERE discord_id='${user.id}'', function (err, result, fields) {
+function createAccount(msg, author) {
+	con.query('SELECT * FROM user_accounts WHERE discord_id=' + author.id + '', function (err, result, fields) {
 	//con.query('SELECT * FROM user_accounts WHERE discord_id=2147483647', function (err, result, fields) {
 	//con.query('SELECT * FROM user_accounts', function (err, result, fields) {
 		if (err) throw err;
 		if (result.length == 0) {
 			msg.reply(result.length);
-			var sql = 'INSERT INTO user_accounts(discord_id, discord_name) VALUES(' + user.id + ', "' + user.username + '")';
+			var sql = 'INSERT INTO user_accounts(discord_id, discord_name) VALUES(' + author.id + ', "' + author.username + '")';
 			con.query(sql, function (err, result) {
 				if (err) throw err;
 				msg.reply('Account created!');
