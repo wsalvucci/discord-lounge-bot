@@ -161,8 +161,7 @@ function drawCard(msg, numTimes) {
 }
 
 function createAccount(msg, user) {
-	var user_id = user.id;
-	con.query('SELECT * FROM user_accounts WHERE discord_id=' + con.escape(user_id) + '', function (err, result, fields) {
+	con.query('SELECT * FROM user_accounts WHERE discord_id=' + user.id, function (err, result, fields) {
 	//con.query('SELECT * FROM user_accounts WHERE discord_id=2147483647', function (err, result, fields) {
 	//con.query('SELECT * FROM user_accounts', function (err, result, fields) {
 		if (err) throw err;
@@ -177,9 +176,6 @@ function createAccount(msg, user) {
 			msg.reply('You already have an account!');
 		}
 	});
-	
-	
-	
 }
 
 client.on('ready', () => {
